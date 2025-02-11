@@ -1,5 +1,17 @@
-<div class="error-container">
+<% if (title) { %>
     <h1><%= title %></h1>
-    <p><%= message %></p>
-    <a href="/">Return to Home</a>
-</div>
+<% } else { %>
+    <h1>Oops! Something went wrong</h1>
+<% } %>
+
+<!-- Display error message -->
+<p><%= message %></p>
+
+<!-- Dynamic Navigation -->
+<%- nav %>
+
+<!-- Add a fun message to soften the error -->
+<p>Looks like you're lost! Try going <a href="/">home</a>.</p>
+
+<!-- Optional: Fun 404 Image -->
+<img src="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif" alt="Lost in space">
