@@ -11,7 +11,8 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute"); 
+const inventoryRoute = require("./routes/inventoryRoute");
+const utilities = require("./utilities/")
 
 /* ***********************
  * View Engine and Templates
@@ -63,7 +64,3 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-
-
-
-
