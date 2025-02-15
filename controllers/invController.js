@@ -48,9 +48,9 @@ invCont.getVehicleDetail = async function (req, res, next) {
  * ************************** */
 invCont.throwError = async function (req, res, next) {
   try {
-    throw new Error("This is a test 500 error.")
+    throw new Error("Intentional server error for testing.")
   } catch (error) {
-    next(error) // Pass error to middleware
+    next(error) // Pass error to middleware for proper handling
   }
 }
 
