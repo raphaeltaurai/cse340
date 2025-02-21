@@ -29,6 +29,14 @@
   
     <p>Already have an account? <a href="/account/login">Login</a></p>
 </div>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
   
   <script src="../js/script.js"></script>
   
