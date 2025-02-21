@@ -8,62 +8,59 @@
 :root {
   --primary-background: #fff;
   --main-accent: #01b0d3;
+  --nav-background: #222;
+  --nav-text: #fff;
+  --hover-color: #01a0c3;
 }
 
-html body {
+html, body {
   margin: 0;
   padding: 0;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--primary-background);
 }
 
+/******* Wrapper *******/
 #wrapper {
   width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1em;
-  padding-bottom: 1em;
+  max-width: 1400px;
+  margin: 1rem auto;
+  padding: 1rem;
   background: white;
-  background-color: var(--primary-background);
   border-radius: 10px;
-  margin-top: 1rem;
-  padding: 1vw;
   border: 5px solid var(--main-accent);
 }
 
-#top-header{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: black;
-    background-color: rgba(185, 183, 183, 0.616);
-    padding: 2rem 0 0 0;
-    grid-column: 1/-1; /*spans all columns*/
+/******* Header *******/
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(185, 183, 183, 0.6);
+  padding: 1rem;
 }
 
-.siteName { 
-   margin: 10px;
-}
-
-.siteName a{
-   font-size: 50px;
-   font-weight: bold;
-   color: black;
-   text-decoration: none;
-}
-
-#tools{
-  margin: 0 20px 50px 0;
-}
-
-#tools a{
-  font-size: 20px;
+.siteName a {
+  font-size: 2rem;
   font-weight: bold;
   color: black;
   text-decoration: none;
 }
 
+#tools a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+#tools a:hover {
+  color: var(--main-accent);
+}
+
+/******* Navigation *******/
 nav {
-  background-color: black;
+  background-color: var(--nav-background);
   padding: 1rem;
 }
 
@@ -76,68 +73,157 @@ nav ul {
   padding: 0;
 }
 
-nav .nav-link {
-  color: white;
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: var(--nav-text);
   text-decoration: none;
-  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease-in-out;
 }
 
-nav .nav-link:hover {
-  color: gray;
+nav ul li a:hover {
+  color: var(--hover-color);
 }
 
-main{
-  display: grid;
+/******* Hero Section *******/
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 1rem;
 }
 
-.hero image{
-  width: 800px;
+.hero img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 10px;
 }
 
 #herotag {
-  display:inline-block;
   position: absolute;
   top: 15%;
-  left: 20%;
-  width: 15%;
-  margin-top: 160px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
+  left: 10%;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-#herotag img{
-  height: 3rem;
-  width: auto;
+#herotag h3 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-#upgrade-images{
-  display: grid;
-  grid-template: 1fr 1fr/1fr 1fr;
+#herotag p {
+  margin: 0.5rem 0;
 }
 
-.upgrades-image{
+#herotag img {
+  width: 100px;
+  height: auto;
+}
+
+/******* Upgrades & Reviews *******/
+.info {
   display: flex;
-  flex-direction: column;
-  text-align: justify;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
 }
 
-.upgrades-image img{
-  background-color: rgb(0, 119, 255) ;
-  padding: 15px;
-  width: 8rem;
+.card {
+  flex: 1;
+  padding: 1rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-footer{
+#upgrade-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.upgrades-image img {
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--main-accent);
+}
+
+.upgrades-image a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.upgrades-image a:hover {
+  color: var(--main-accent);
+}
+
+/******* Footer *******/
+footer {
   background-color: white;
   color: black;
   font-weight: bold;
-  text-align: left;
-  padding: 10px;
+  text-align: center;
+  padding: 1rem;
+  border-top: 2px solid var(--main-accent);
 }
 
-.copyright{
+.copyright {
   color: black;
 }
+
+.vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.vehicle-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.vehicle-info {
+  text-align: center;
+}
+
+/******* Responsive Design *******/
+@media only screen and (max-width: 768px) {
+  #top-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+}
+  /*#upgrade-images {
+    grid-template-columns: repeat(2, 1fr);
+  }*/
 
 
 @media only screen and (min-width: 768px) {
@@ -150,20 +236,48 @@ footer{
     background-position: 0 0, 0 0, -50px -50px, 50px 50px;
   }
 
-  
-
-  .info{
-    display: flex;
-    flex-direction: row-reverse;
+  .vehicle-detail {
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: center;
   }
-  
-  #upgrade-images{
-    display: grid;
-    grid-template: 1fr 1fr/1fr 1fr;
-    gap: 20px;
+
+  .vehicle-image {
+    max-width: 50%;
   }
-  
+
+  .vehicle-info {
+    text-align: left;
+    max-width: 50%;
+  }
 }
 
-
+.error-container {
+  text-align: center;
+  margin: 50px auto;
+}
+.error-title {
+  color: #d9534f;
+  font-size: 2rem;
+}
+.error-message {
+  font-size: 1.2rem;
+}
+.error-nav {
+  margin: 20px 0;
+}
+.error-hint {
+  font-size: 1rem;
+}
+.error-link {
+  color: #005f73;
+  font-weight: bold;
+  text-decoration: none;
+}
+.error-link:hover {
+  text-decoration: underline;
+}
+.error-image img {
+  max-width: 300px;
+  margin-top: 20px;
+}

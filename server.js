@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -11,7 +12,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute");
+const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 
 /* ***********************
@@ -33,22 +34,43 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 
 // File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+app.use(async (req, res) => {
+  let nav = await utilities.getNav()
+  res.status(404).render("errors/error", {
+    title: "Page Not Found",
+    message: "Sorry, the page you requested does not exist.",
+    nav,
+  })
 })
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express Error Handler - Secure Fix
+ * Place after all other middleware
+ *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+<<<<<<< HEAD
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
+=======
+
+  const status = err.status || 500
+
+  // Securely display user-friendly messages
+  const message =
+    status === 500
+      ? "Oops! Something went wrong on our end. Please try again later."
+      : err.message
+
+  res.status(status).render("errors/error", {
+    title: status === 404 ? "Page Not Found" : "Server Error",
+    message,
+    nav,
+>>>>>>> fcbc04c95905c4ff4eb6a3115ce345bbccd4dc9c
   })
 })
 
