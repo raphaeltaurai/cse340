@@ -283,24 +283,28 @@ footer {
 }
 
 /* Login-form*/
-/* Center the form container */
+/* Center the login form within the page */
 .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+/* Login form styling */
+.login-form {
   width: 100%;
-  max-width: 400px;
-  margin: 100px auto;
+  max-width: 350px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Form styling */
-.login-form {
   display: flex;
   flex-direction: column;
 }
 
-/* Label styling */
+/* Form labels */
 .login-form label {
   font-weight: bold;
   margin-bottom: 5px;
@@ -310,51 +314,60 @@ footer {
 /* Input fields */
 .login-form input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
 }
 
 /* Input focus effect */
 .login-form input:focus {
-  border-color: #005f73;
+  border-color: var(--main-accent);
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 95, 115, 0.5);
+  box-shadow: 0 0 5px rgba(1, 176, 211, 0.5);
 }
 
-/* Submit button */
+/* Login button */
 .login-form button {
-  background-color: #005f73;
+  background-color: var(--main-accent);
   color: #ffffff;
   border: none;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease-in-out;
 }
 
-/* Submit button hover effect */
+/* Button hover effect */
 .login-form button:hover {
-  background-color: #00414d;
+  background-color: var(--hover-color);
 }
 
 /* Sign-up link */
 .signup-link {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 14px;
 }
 
 .signup-link a {
-  color: #005f73;
+  color: var(--main-accent);
   font-weight: bold;
   text-decoration: none;
 }
 
 .signup-link a:hover {
   text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-form {
+    max-width: 90%;
+    padding: 15px;
+  }
 }
