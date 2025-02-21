@@ -283,7 +283,12 @@ footer {
 }
 
 /* Login-form*/
-/* Center the login form within the page */
+#loginform{
+  display:flex;
+  justify-content: center;
+}
+
+/* Center the login form */
 .login-container {
   display: flex;
   justify-content: center;
@@ -297,9 +302,10 @@ footer {
   width: 100%;
   max-width: 350px;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #0099cc;
+  /*Bluebackground*/border: 2px solid #0077aa;
+  /*Bordersimilartoscreenshot*/border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
 }
@@ -308,54 +314,65 @@ footer {
 .login-form label {
   font-weight: bold;
   margin-bottom: 5px;
-  color: #333;
+  color: black;
 }
 
 /* Input fields */
 .login-form input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 16px;
-  transition: border-color 0.3s ease-in-out;
 }
 
-/* Input focus effect */
-.login-form input:focus {
-  border-color: var(--main-accent);
-  outline: none;
-  box-shadow: 0 0 5px rgba(1, 176, 211, 0.5);
+/* Password instructions */
+.password-requirements {
+  font-size: 12px;
+  font-style: italic;
+  color: black;
+  margin-bottom: 10px;
+}
+
+/* Show Password button */
+.show-password {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 /* Login button */
 .login-form button {
-  background-color: var(--main-accent);
-  color: #ffffff;
-  border: none;
-  padding: 12px;
+  background-color: #eeeeee;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 10px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
 }
 
 /* Button hover effect */
 .login-form button:hover {
-  background-color: var(--hover-color);
+  background-color: #dddddd;
 }
 
 /* Sign-up link */
 .signup-link {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 14px;
 }
 
 .signup-link a {
-  color: var(--main-accent);
+  color: black;
   font-weight: bold;
   text-decoration: none;
 }
@@ -364,10 +381,3 @@ footer {
   text-decoration: underline;
 }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .login-form {
-    max-width: 90%;
-    padding: 15px;
-  }
-}
