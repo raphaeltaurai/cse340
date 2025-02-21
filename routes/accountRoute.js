@@ -1,11 +1,18 @@
+/* *************************************
+* Account routes
+*Unit 4, deliver login view activity
+*  *********************************** */
 // Needed Resources 
 const express = require("express");
 const router = new express.Router();
-const accountController = require("../controllers/accountController");
+const accController = require("../controllers/accController");
 const utilities = require("../utilities");
 
-// Route for "My Account" page
-router.get("/my-account", utilities.errorHandler(accountController.getMyAccount));
+/* *************************************
+* Deliver Login View
+*Unit 4, deliver login view activity
+*  *********************************** */
+router.get("/login", utilities.handleErrors(accController.buildLogin));
 
 // Export the router
 module.exports = router;
