@@ -15,6 +15,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountController = require("./controllers/accountController.js")
 const accountRoute = require("./routes/accountRoute.js")
 const utilities = require("./utilities/")
 
