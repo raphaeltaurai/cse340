@@ -541,3 +541,227 @@ footer {
   padding: 0.5rem;
   border: 1px solid #ddd;
 }
+
+/* Enhanced Vehicle Detail View */
+#vehicle-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#vehicle-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+#vehicle-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vehicle-display {
+  flex: 1;
+  min-width: 300px;
+}
+
+.vehicle-display h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-display p {
+  margin: 0.8rem 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.vehicle-display strong {
+  color: #4c82af;
+}
+
+/* Enhanced Classification Grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  list-style: none;
+}
+
+#inv-display li {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px);
+}
+
+#inv-display img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.namePrice {
+  padding: 1rem;
+}
+
+.namePrice h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.namePrice a {
+  color: #333;
+  text-decoration: none;
+}
+
+.namePrice a:hover {
+  color: #4c82af;
+}
+
+.namePrice span {
+  display: block;
+  color: #4c82af;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Enhanced Account Management View */
+.management-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Flash Messages Enhancement */
+.notice, .success, .error {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.notice {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #1565c0;
+}
+
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+/* Enhanced Form Styling */
+.form-container {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #4c82af;
+  box-shadow: 0 0 0 2px rgba(76,130,175,0.2);
+  outline: none;
+}
+
+.form-button {
+  background: #4c82af;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.form-button:hover {
+  background: #3a6a8f;
+}
+
+.form-hint {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive Enhancements */
+@media screen and (max-width: 768px) {
+  #vehicle-display {
+    flex-direction: column;
+  }
+  
+  .management-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .form-container {
+    margin: 1rem;
+  }
+}
+
+/* Account Update Form Enhancement */
+#updateAccountForm {
+  display: grid;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+/* Inventory Table Enhancement */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1rem 0;
+}
+
+#inventoryDisplay th {
+  background: #4c82af;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+}
+
+#inventoryDisplay td {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+#inventoryDisplay tr:hover {
+  background: #f5f5f5;
+}
+
+/* Add hover effects to buttons */
+.button, button {
+  transition: all 0.3s ease;
+}
+
+.button:hover, button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
