@@ -62,4 +62,18 @@ router.post("/update",
   utilities.handleErrors(invController.updateInventory)
 )
 
-module.exports = router;
+// Classification routes
+// router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+// router.post("/add-classification", 
+//   validate.classificationRules(),
+//   validate.checkClassificationData,
+//   utilities.handleErrors(invController.addClassification))
+
+// Inventory routes  
+// router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
+// router.post("/add-inventory",
+//   validate.inventoryRules(),
+//   validate.checkInventoryData, 
+//   utilities.handleErrors(invController.addInventory))
+
+module.exports = router

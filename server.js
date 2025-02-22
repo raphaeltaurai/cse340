@@ -6,6 +6,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const pool = require('./database/')
 const express = require("express")
@@ -23,6 +24,11 @@ const bodyParser = require("body-parser")
 /* ***********************
  * Middleware
  * ************************/
+
+// JWT Check
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
+
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,

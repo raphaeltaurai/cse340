@@ -1,28 +1,33 @@
-const invModel = require("../models/inventory-model")
-const Util = {}
+const invModel = require('../models/inventory-model');
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
+const Util = {};
+const { body } = require("express-validator")
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-Util.getNav = async function (req, res, next) {
-  let data = await invModel.getClassifications()
-  let list = "<ul>"
-  list += '<li><a href="/" title="Home page">Home</a></li>'
-  data.rows.forEach((row) => {
-    list += "<li>"
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>"
-    list += "</li>"
-  })
-  list += "</ul>"
-  return list
-}
+Util.getNav = async function (req, res, next ) {
+    let data = await invModel.getClassifications();
+    let list = '<ul>';
+    list += '<li><a href="/" title="Home page">Home</a></li>';
+    data.rows.forEach((row) => {
+        list += '<li>';
+        list +=
+            '<a href="/inv/type/' +
+            row.classification_id +
+            '" title="See our inventory of ' +
+            row.classification_name +
+            ' vehicles">' +
+            row.classification_name +
+            '</a>';
+        list += '</li>';
+    });
+    list += '</ul>';
+    return list;
+};
+
+module.exports = Util;
 
 
 /* **************************************
@@ -60,41 +65,42 @@ Util.buildClassificationGrid = async function(data){
 
 
 /* **************************************
- * Build the vehicle detail HTML view
+ * Build the vehicle detail view HTML
  * ************************************ */
-Util.buildVehicleDetailView = function (vehicle) {
-  if (!vehicle) {
-    return "<p class='notice'>Vehicle not found.</p>"
-  }
-
-  let detailView = `
-    <div class="vehicle-detail">
-      <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
-      <div class="vehicle-container">
-        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" class="vehicle-image" />
-        <div class="vehicle-info">
-          <h2>Details</h2>
-          <p><strong>Make:</strong> ${vehicle.inv_make}</p>
-          <p><strong>Model:</strong> ${vehicle.inv_model}</p>
-          <p><strong>Year:</strong> ${vehicle.inv_year}</p>
-          <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</p>
-          <p><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(vehicle.inv_miles)} miles</p>
-          <p><strong>Description:</strong> ${vehicle.inv_description}</p>
-        </div>
+Util.buildVehicleDetail = async function (data) {
+  let drill 
+  if (data.length > 0) {
+    drill = '<div id="vehicle-display">';
+    data.forEach((vehicle => {
+      drill += `
+      <div id="vehicle-image">
+         <img src="${vehicle.inv_image}" alt="vehicle image">
       </div>
-    </div>
-  `
+      <div class="vehicle-display">
+        <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+        <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+        <p><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</p>
+        <p><strong>Mileage:</strong> ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)} miles</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+      </div>`
+    }))
 
-  return detailView
-}
+    drill += "</div>"
+  } else {
+    drill = '<p class="notice">Sorry, no matching vehicle could be found.</p>';
+   }
+  console.log(drill);
+  return drill
+};
 
 
 /* ****************************************
  * Middleware For Handling Errors
- * Wrap other function in this for 
+ * Wrap other function in this for
  * General Error Handling
  **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+Util.handleErrors = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 /* **************************************
 * Build the classification select list
@@ -118,28 +124,27 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList
 }
 
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-    jwt.verify(
-      req.cookies.jwt,
-      process.env.ACCESS_TOKEN_SECRET,
-      function (err, accountData) {
-        if (err) {
-          req.flash("notice", "Please log in")
-          res.clearCookie("jwt")
-          return res.redirect("/account/login")
-        }
-        res.locals.accountData = accountData
-        res.locals.loggedin = 1
-        next()
-      }
-    )
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
   } else {
-    res.locals.loggedin = 0
-    next()
+   next()
   }
 }
 
@@ -156,7 +161,7 @@ Util.checkLogin = (req, res, next) => {
  }
 
 /* ****************************************
- * Middleware to check inventory authorization
+ * Middleware to check token and authorization
  * *************************************** */
 Util.checkInventoryAuth = async (req, res, next) => {
   if (!res.locals.loggedin) {
@@ -169,7 +174,6 @@ Util.checkInventoryAuth = async (req, res, next) => {
     return res.redirect("/")
   }
   
-  // Allow access for Employee and Admin account types
   if (res.locals.accountData.account_type === "Employee" || 
       res.locals.accountData.account_type === "Admin") {
     next()
@@ -180,4 +184,3 @@ Util.checkInventoryAuth = async (req, res, next) => {
 }
 
 module.exports = Util
-

@@ -20,28 +20,22 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 /* ***************************
- *  Get vehicle detail by ID
+ *  Build vehicle detail view
  * ************************** */
-invCont.getVehicleDetail = async function (req, res, next) {
-  try {
-    const inv_id = req.params.inv_id
-    const vehicle = await invModel.getVehicleById(inv_id) // Fetch vehicle data
 
-    if (!vehicle) {
-      return res.status(404).render("errors/404", { title: "Vehicle Not Found" })
-    }
-
-    let nav = await utilities.getNav()
-
-    res.render("./inventory/detail", {
-      title: `${vehicle.make} ${vehicle.model}`,
-      nav,
-      vehicle,
-    })
-  } catch (error) {
-    next(error)
-  }
-}
+invCont.buildByVehicleId = async function (req, res, next) {
+  const vehicleId = req.params.vehicleId;
+  const data = await invModel.getVehicleById(vehicleId);
+  const detail = await utilities.buildVehicleDetail(data);
+  let nav = await utilities.getNav();
+  const vehicleName = `${data[0].inv_make} ${data[0].inv_model}`;
+  res.render("./inventory/vehicle-detail", {
+    title: vehicleName + " vehicle detail",
+    nav,
+    detail,
+    errors: null
+  });
+};
 
 /* ***************************
  *  Build management view
@@ -278,15 +272,15 @@ invCont.updateInventory = async function (req, res, next) {
   }
 }
 
-/* ***************************
- *  Intentional 500 Error Route
- * ************************** */
-invCont.throwError = async function (req, res, next) {
+// Trigger route error and its function
+invCont.triggerError = async function (req, res, next) {
+  console.log("Causing an error...");
   try {
-    throw new Error("Intentional server error for testing.")
+      let aNumber = 1 / 0; // Simulated error
+      throw new Error("This is an intentional error.");
   } catch (error) {
-    next(error) // Pass error to middleware for proper handling
+      next(error); // Pass the error to the next middleware
   }
-}
+};
 
 module.exports = invCont
