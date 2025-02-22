@@ -24,6 +24,7 @@ const bodyParser = require("body-parser")
 /* ***********************
  * Middleware
  * ************************/
+app.use(express.static("public"))  // Add this before other middleware
 
 // JWT Check
 app.use(cookieParser())

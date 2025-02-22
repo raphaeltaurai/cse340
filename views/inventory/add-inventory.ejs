@@ -1,13 +1,11 @@
 <% if (title) { %>
   <h1><%= title %></h1>
-  <% } else {
-    res.redirect('/')
-  } %>
+<% } %>
 
 <%- messages() %>
 
-<div class="form-container login-container">
-  <form id="addInventoryForm" action="/inv/add-inventory" method="post" class="login-form">
+<div class="form-container">
+  <form id="addInventoryForm" action="/inv/add-inventory" method="post">
     <p class="form-hint">All fields are required.</p>
 
     <div class="form-group">
@@ -17,13 +15,7 @@
 
     <div class="form-group">
       <label for="inv_make">Make:</label>
-      <input 
-        type="text" 
-        id="inv_make" 
-        name="inv_make"
-        required
-        value="<%= locals.inv_make %>"
-      >
+      <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
     </div>
 
     <div class="form-group">
