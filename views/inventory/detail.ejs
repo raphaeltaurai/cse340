@@ -1,7 +1,11 @@
 <main>    
   <% if (vehicle) { %>
     <div class="vehicle-detail">
-      <img src="<%= vehicle.inv_image %>" alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>" class="vehicle-image" />
+      <img 
+        src="<%= vehicle.inv_image %>" 
+        alt="<%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %>" 
+        class="vehicle-image" 
+      />
       <div class="vehicle-info">
         <h2>Vehicle Details</h2>
         <p><strong>Make:</strong> <%= vehicle.inv_make %></p>

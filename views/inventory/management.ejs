@@ -5,16 +5,22 @@
   <%- messages() %>
   
   <div class="management-links">
-    <p><a href="/inv/add-classification">Add New Classification</a></p>
-    <p><a href="/inv/add-inventory">Add New Vehicle</a></p>
+    <h2>Inventory Management Tools</h2>
+    <p>Please select from the following options:</p>
+    <div class="management-buttons">
+      <a href="/inv/add-classification" class="button">Add New Classification</a>
+      <a href="/inv/add-inventory" class="button">Add New Vehicle</a>
+    </div>
   </div>
   
-  <h2>Manage Inventory</h2>
-  <p>Select a classification to see those inventory items</p>
-  
-  <%- classificationSelect %>
-  
-  <table id="inventoryDisplay"></table>
+  <% if (classificationSelect) { %>
+  <div class="inventory-management">
+    <h2>Manage Inventory</h2>
+    <p>Choose a classification to see those inventory items</p>
+    <%- classificationSelect %>
+    <table id="inventoryDisplay"></table>
+  </div>
+  <% } %>
   
   <noscript>JavaScript must be enabled to use this page.</noscript>
   

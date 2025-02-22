@@ -123,21 +123,23 @@ Util.buildClassificationList = async function (classification_id = null) {
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-   jwt.verify(
-    req.cookies.jwt,
-    process.env.ACCESS_TOKEN_SECRET,
-    function (err, accountData) {
-     if (err) {
-      req.flash("Please log in")
-      res.clearCookie("jwt")
-      return res.redirect("/account/login")
-     }
-     res.locals.accountData = accountData
-     res.locals.loggedin = 1
-     next()
-    })
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("notice", "Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      }
+    )
   } else {
-   next()
+    res.locals.loggedin = 0
+    next()
   }
 }
 
@@ -154,7 +156,7 @@ Util.checkLogin = (req, res, next) => {
  }
 
 /* ****************************************
- * Middleware to check token and authorization
+ * Middleware to check inventory authorization
  * *************************************** */
 Util.checkInventoryAuth = async (req, res, next) => {
   if (!res.locals.loggedin) {
@@ -167,6 +169,7 @@ Util.checkInventoryAuth = async (req, res, next) => {
     return res.redirect("/")
   }
   
+  // Allow access for Employee and Admin account types
   if (res.locals.accountData.account_type === "Employee" || 
       res.locals.accountData.account_type === "Admin") {
     next()

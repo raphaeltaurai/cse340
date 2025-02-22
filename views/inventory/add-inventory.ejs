@@ -6,8 +6,16 @@
   
   <%- messages() %>
   
-  <div class="form-container login-container">
-    <form id="addInventoryForm" action="/inv/add-inventory" method="post" class="login-form">
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  
+  <div class="form-container">
+    <form id="addInventoryForm" action="/inv/add-inventory" method="post">
       <p class="form-hint">All fields are required.</p>
   
       <div class="form-group">
@@ -22,7 +30,7 @@
           id="inv_make" 
           name="inv_make"
           required
-          value="<%= locals.inv_make %>"
+          value="<%= locals.inv_make ? inv_make : '' %>"
         >
       </div>
   
@@ -33,20 +41,20 @@
           id="inv_model" 
           name="inv_model"
           required
-          value="<%= locals.inv_model %>"
+          value="<%= locals.inv_model ? inv_model : '' %>"
         >
       </div>
   
       <div class="form-group">
         <label for="inv_year">Year:</label>
         <input 
-          type="text" 
+          type="number" 
           id="inv_year" 
           name="inv_year"
-          pattern="^\d{4}$"
           required
-          value="<%= locals.inv_year %>"
-          title="Please enter a 4-digit year"
+          min="1900"
+          max="2024"
+          value="<%= locals.inv_year ? inv_year : '' %>"
         >
       </div>
   
@@ -56,7 +64,7 @@
           id="inv_description" 
           name="inv_description"
           required
-        ><%= locals.inv_description %></textarea>
+        ><%= locals.inv_description ? inv_description : '' %></textarea>
       </div>
   
       <div class="form-group">
@@ -66,7 +74,7 @@
           id="inv_image" 
           name="inv_image"
           required
-          value="/images/vehicles/no-image.png"
+          value="<%= locals.inv_image ? inv_image : '/images/vehicles/no-image.png' %>"
         >
       </div>
   
@@ -77,7 +85,7 @@
           id="inv_thumbnail" 
           name="inv_thumbnail"
           required
-          value="/images/vehicles/no-image-tn.png"
+          value="<%= locals.inv_thumbnail ? inv_thumbnail : '/images/vehicles/no-image-tn.png' %>"
         >
       </div>
   
@@ -87,10 +95,10 @@
           type="number" 
           id="inv_price" 
           name="inv_price"
+          required
           min="0"
           step="0.01"
-          required
-          value="<%= locals.inv_price %>"
+          value="<%= locals.inv_price ? inv_price : '' %>"
         >
       </div>
   
@@ -100,9 +108,9 @@
           type="number" 
           id="inv_miles" 
           name="inv_miles"
-          min="0"
           required
-          value="<%= locals.inv_miles %>"
+          min="0"
+          value="<%= locals.inv_miles ? inv_miles : '' %>"
         >
       </div>
   
@@ -113,7 +121,7 @@
           id="inv_color" 
           name="inv_color"
           required
-          value="<%= locals.inv_color %>"
+          value="<%= locals.inv_color ? inv_color : '' %>"
         >
       </div>
   
